@@ -1,24 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
+import Head from './component/Head/Head';
+import Home from './component/Home/Home';
+import { createContext, useState } from 'react';
+import CategoryDetail from './component/CategoryDetail/CategoryDetail';
+import Category from './component/CategoryDetail/Category/Category';
+
+ export const categoryContext = createContext();
+
+
 
 function App() {
+  const [clicked, setClicked] = useState('laptop');
+
   return (
-    <div className="App">
+    <categoryContext.Provider className="App" value = {[clicked, setClicked]}>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>nuber count: {clicked}</p>
+       <Head></Head>
+       <Category></Category>
+       
+       <Home clicked= {clicked}></Home>
+       <CategoryDetail clicked = {clicked}>  </CategoryDetail>
+
       </header>
-    </div>
+    </categoryContext.Provider>
   );
 }
 
